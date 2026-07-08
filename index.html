@@ -293,16 +293,33 @@
   .feat .ic{font-size:38px;margin-bottom:16px;filter:drop-shadow(0 6px 12px rgba(212,175,55,.4))}
   .feat h4{font-size:13px;letter-spacing:.8px;text-transform:uppercase;color:var(--gold-1);line-height:1.5}
 
-  /* ===== GALLERY ===== */
-  .gallery{background:linear-gradient(180deg,#f1e8d6,var(--cream))}
-  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-  .gal-item{position:relative;overflow:hidden;border-radius:16px;aspect-ratio:3/4;border:1px solid rgba(191,144,47,.28);box-shadow:0 12px 30px rgba(46,10,29,.12);cursor:pointer}
-  .gal-item img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;transition:.7s}
-  .gal-item:hover img{transform:scale(1.08)}
-  .gal-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 16px;color:var(--gold-1);
-    font-family:'Playfair Display',serif;font-size:20px;background:linear-gradient(transparent,rgba(11,6,7,.88));transform:translateY(10px);opacity:0;transition:.4s}
+  /* ===== GALLERY (infinite marquee slider) ===== */
+  .gallery{background:linear-gradient(180deg,#f1e8d6,var(--cream));overflow:hidden}
+  .gal-slider{position:relative;margin-top:10px}
+  .gal-viewport{overflow:hidden;cursor:grab;padding:26px 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .gal-viewport.drag{cursor:grabbing}
+  .gal-track{display:flex;gap:22px;width:max-content;will-change:transform}
+  .gal-item{position:relative;flex:0 0 auto;width:300px;overflow:hidden;border-radius:18px;aspect-ratio:3/4;
+    border:1px solid rgba(191,144,47,.28);box-shadow:0 14px 34px rgba(46,10,29,.14);cursor:pointer;
+    transition:transform .55s cubic-bezier(.2,.7,.2,1),box-shadow .55s}
+  .gal-item img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;transition:.7s;pointer-events:none;user-select:none;-webkit-user-drag:none}
+  .gal-viewport:hover .gal-item{opacity:.62;filter:saturate(.85)}
+  .gal-item:hover{opacity:1!important;filter:none!important;transform:translateY(-12px) scale(1.05);box-shadow:0 30px 66px rgba(46,10,29,.34);z-index:3}
+  .gal-item:hover img{transform:scale(1.09)}
+  .gal-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:38px 18px 18px;color:var(--gold-1);
+    font-family:'Playfair Display',serif;font-size:21px;background:linear-gradient(transparent,rgba(11,6,7,.9));transform:translateY(10px);opacity:0;transition:.4s}
   .gal-item::after{content:"⤢";position:absolute;top:14px;right:16px;color:var(--gold-1);font-size:18px;opacity:0;transition:.4s;text-shadow:0 2px 6px rgba(0,0,0,.5)}
   .gal-item:hover figcaption,.gal-item:hover::after{transform:none;opacity:1}
+  .gal-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:54px;height:54px;border-radius:50%;
+    border:1px solid var(--gold-3);background:rgba(255,252,246,.82);backdrop-filter:blur(6px);color:var(--maroon);
+    font-family:'Playfair Display',serif;font-size:26px;line-height:1;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;box-shadow:0 12px 30px rgba(46,10,29,.2);transition:.3s}
+  .gal-nav:hover{background:linear-gradient(135deg,var(--gold-2),var(--gold-3));color:#3a0f22;transform:translateY(-50%) scale(1.1)}
+  .gal-nav.prev{left:8px}
+  .gal-nav.next{right:8px}
+  .gal-hint{text-align:center;margin-top:18px;color:var(--gold-3);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase}
 
   /* lightbox */
   #lightbox{position:fixed;inset:0;z-index:150;background:rgba(7,4,5,.94);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.35s;padding:30px}
@@ -503,7 +520,8 @@
     .weeks{grid-template-columns:1fr}
     .feat-grid{grid-template-columns:repeat(2,1fr)}
     .testi-grid{grid-template-columns:1fr}
-    .gal-grid{grid-template-columns:repeat(2,1fr)}
+    .gal-item{width:236px}
+    .gal-nav{width:46px;height:46px;font-size:22px}
   }
 
   /* Standard Mobiles (max-width: 600px) */
@@ -539,7 +557,7 @@
 
   /* Very Small Devices (max-width: 380px) */
   @media(max-width:380px){
-    .gal-grid{grid-template-columns:1fr;max-width:300px;margin:0 auto}
+    .gal-item{width:210px}
     .hero h1{font-size:46px}
     .week-card{flex-direction:column}
     .scale-opt i{width:32px;height:32px}
@@ -723,7 +741,14 @@
       <div class="divider"></div>
       <p>Glimpses from the stage, the spotlight and the journey — the standard you'll be trained to reach.</p>
     </div>
-    <div class="gal-grid" id="gal"></div>
+    <div class="gal-slider reveal">
+      <button class="gal-nav prev" aria-label="Previous">‹</button>
+      <div class="gal-viewport" id="galVp">
+        <div class="gal-track" id="gal"></div>
+      </div>
+      <button class="gal-nav next" aria-label="Next">›</button>
+    </div>
+    <p class="gal-hint">✦ Hover to pause · drag or use arrows to explore ✦</p>
   </div>
 </section>
 
@@ -758,7 +783,7 @@
       <div class="ec-fee">৳ 3,000 <small>BDT</small></div>
       <p class="ec-sub">8 weeks · 16 live sessions · Certificate of completion</p>
       <div class="ec-pay">
-        <span>Payment via bKash</span>
+        <span>Send money to this personal bKash account</span>
         <b>+880 1937 460626</b>
       </div>
       <a class="btn btn-gold" data-modal style="display:block;width:100%;text-align:center">Register Now 👑</a>
@@ -854,7 +879,18 @@
 <!-- LIGHTBOX -->
 <div id="lightbox"><span class="close">✕</span><img src="" alt="" /></div>
 
+<!-- EmailJS SDK — registrant confirmation email -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  // ================== EmailJS CONFIG ==================
+  // Registrant ke shundor confirmation email pathanor jonno.
+  // EmailJS dashboard (https://dashboard.emailjs.com) theke niche er 3 ta value bosao:
+  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";   // Account → General → Public Key
+  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";   // Email Services → Service ID
+  const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // Email Templates → Template ID
+  const emailjsReady = window.emailjs && !EMAILJS_PUBLIC_KEY.startsWith("YOUR_");
+  if(emailjsReady){ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
   // ---- Curriculum ----
   const weeks=[
     {n:1,t:"Pageant Journey & Mindset",p:["Understanding the Pageant World","Types of Pageants & Judging Criteria","Winner Mindset & Goal Setting"]},
@@ -882,15 +918,72 @@
 
   // ---- Gallery ----
   const gal=[
-    {s:"480796096_1236079781427440_6315121278454431775_n.jpg",c:"The Crowning Glory"},
-    {s:"470227350_18040133552206469_4839617921930968129_n.jpg",c:"The International Stage"},
-    {s:"470188344_18040133579206469_5962022430184725459_n.jpg",c:"Red Carpet Presence"},
-    {s:"607518388_18076866665206469_3884325592205961570_n.jpg",c:"Style & Confidence"},
+    {s:"gallery/gallery-01.jpg",c:"The Crowning Glory"},
+    {s:"gallery/gallery-02.jpg",c:"Reign in Silver"},
+    {s:"gallery/gallery-03.jpg",c:"Miss Grand Bangladesh"},
+    {s:"gallery/gallery-04.jpg",c:"Coronation Night"},
+    {s:"gallery/gallery-05.jpg",c:"Pride of Bangladesh"},
+    {s:"gallery/gallery-06.jpg",c:"Studio Elegance"},
+    {s:"gallery/gallery-07.jpg",c:"Glamour & Grace"},
+    {s:"gallery/gallery-08.jpg",c:"Emerald Beauty"},
+    {s:"gallery/gallery-09.jpg",c:"Parisian Nights"},
+    {s:"gallery/gallery-10.jpg",c:"Louvre Muse"},
+    {s:"gallery/gallery-11.jpg",c:"Fairytale Gown"},
+    {s:"gallery/gallery-12.jpg",c:"Silver Screen"},
+    {s:"gallery/gallery-13.jpg",c:"Riverside Royalty"},
+    {s:"gallery/gallery-14.jpg",c:"The Runway"},
+    {s:"gallery/gallery-15.jpg",c:"The Supranational Stage"},
+    {s:"gallery/gallery-16.jpg",c:"The Winning Moment"},
+    {s:"gallery/gallery-17.jpg",c:"Crowned in Grace"},
+    {s:"gallery/gallery-18.jpg",c:"Sapphire Sequins"},
+    {s:"gallery/gallery-19.jpg",c:"Queen's Coronation"},
+    {s:"gallery/gallery-20.jpg",c:"Portrait of a Queen"},
+    {s:"gallery/gallery-21.jpg",c:"Starlit Silver"},
+    {s:"gallery/gallery-22.jpg",c:"Passing the Crown"},
+    {s:"gallery/gallery-23.jpg",c:"Emerald Rooftop"},
+    {s:"gallery/gallery-24.jpg",c:"Blue Hour in Paris"},
+    {s:"gallery/gallery-25.jpg",c:"At the Louvre"},
+    {s:"gallery/gallery-26.jpg",c:"Palace Corridor"},
+    {s:"gallery/gallery-27.jpg",c:"Fountain Muse"},
+    {s:"gallery/gallery-28.jpg",c:"Garden of Sashes"},
+    {s:"gallery/gallery-29.jpg",c:"Red Carpet Debut"},
+    {s:"gallery/gallery-30.jpg",c:"TechMODA Runway"},
   ];
-  document.getElementById('gal').innerHTML=gal.map(g=>`
-    <figure class="gal-item reveal" data-src="${g.s}">
-      <img src="${g.s}" alt="${g.c}" loading="lazy"/><figcaption>${g.c}</figcaption>
-    </figure>`).join('');
+  const galCard=g=>`
+    <figure class="gal-item" data-src="${g.s}">
+      <img src="${g.s}" alt="${g.c}" loading="lazy" draggable="false"/><figcaption>${g.c}</figcaption>
+    </figure>`;
+  // Duplicate the set once so the ribbon can loop seamlessly
+  document.getElementById('gal').innerHTML=gal.map(galCard).join('')+gal.map(galCard).join('');
+
+  // ---- Gallery slider: infinite auto-scroll + hover-pause + drag + arrows ----
+  (function(){
+    const vp=document.getElementById('galVp'), track=document.getElementById('gal');
+    if(!vp||!track) return;
+    let half=0, pos=0, moved=false, dragging=false, startX=0, startPos=0;
+    const SPEED=0.6; let autoV=SPEED, animId=0;
+    const measure=()=>{ half=track.scrollWidth/2||0; };
+    const wrap=()=>{ if(half){ if(pos>=half) pos-=half; else if(pos<0) pos+=half; } };
+    const draw=()=>{ track.style.transform='translateX('+(-pos)+'px)'; };
+    measure(); setTimeout(measure,500); addEventListener('load',measure); addEventListener('resize',measure);
+    const tick=()=>{ if(!dragging && !animId){ pos+=autoV; wrap(); draw(); } requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+    vp.addEventListener('mouseenter',()=>{ if(!dragging) autoV=0; });
+    vp.addEventListener('mouseleave',()=>{ if(!dragging) autoV=SPEED; });
+    const xOf=e=>e.touches?e.touches[0].clientX:e.clientX;
+    const down=e=>{ dragging=true; moved=false; startX=xOf(e); startPos=pos; vp.classList.add('drag'); };
+    const move=e=>{ if(!dragging) return; const dx=xOf(e)-startX; if(Math.abs(dx)>6) moved=true; pos=startPos-dx; wrap(); draw(); };
+    const up=()=>{ if(!dragging) return; dragging=false; vp.classList.remove('drag'); autoV=SPEED; };
+    vp.addEventListener('mousedown',down); addEventListener('mousemove',move); addEventListener('mouseup',up);
+    vp.addEventListener('touchstart',down,{passive:true}); vp.addEventListener('touchmove',move,{passive:true}); vp.addEventListener('touchend',up);
+    const glide=dir=>{ const from=pos, dist=dir*340, t0=performance.now(), dur=560; cancelAnimationFrame(animId);
+      const step=now=>{ const p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3); pos=from+dist*e; wrap(); draw();
+        if(p<1){ animId=requestAnimationFrame(step); } else { animId=0; } };
+      animId=requestAnimationFrame(step); };
+    document.querySelector('.gal-nav.prev').addEventListener('click',()=>glide(-1));
+    document.querySelector('.gal-nav.next').addEventListener('click',()=>glide(1));
+    window.__galMoved=()=>moved;
+  })();
 
   // ---- Testimonials ----
   const quotes=[
@@ -932,7 +1025,9 @@
   // ---- Lightbox ----
   const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
   document.getElementById('gal').addEventListener('click',e=>{
-    const f=e.target.closest('.gal-item');if(!f)return;lbImg.src=f.dataset.src;lb.classList.add('open');
+    const f=e.target.closest('.gal-item');if(!f)return;
+    if(window.__galMoved&&window.__galMoved())return;
+    lbImg.src=f.dataset.src;lb.classList.add('open');
   });
   lb.addEventListener('click',()=>lb.classList.remove('open'));
   addEventListener('keydown',e=>{if(e.key==='Escape'){lb.classList.remove('open');closeModal();closeMenu();}});
@@ -956,7 +1051,19 @@
       const res=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)});
       const data=await res.json();
       if(data.success){
-        msg.textContent='✦ Thank you! We\'ll contact you shortly with the class schedule.';
+        // Registrant ke shundor confirmation email (best-effort — fail korleo flow bhangbe na)
+        if(emailjsReady){
+          const f=form;
+          emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_email:   f.elements['Email'].value,
+            to_name:    f.elements['Full Name'].value,
+            reg_age:    f.elements['Age'].value,
+            reg_city:   f.elements['City'].value,
+            reg_experience: (f.elements['Experience Level'].value||'—'),
+            reg_competed:   (f.elements['Competed Before'].value||'—'),
+          }).catch(err=>console.warn('Confirmation email failed:',err));
+        }
+        msg.textContent='✦ Thank you! A confirmation email is on its way. We\'ll contact you shortly with the class schedule.';
         msg.style.color=''; msg.classList.add('show');
         form.reset(); fileName.textContent='📎 Add file (max 10 MB)';
       }else{
