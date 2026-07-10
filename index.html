@@ -812,6 +812,7 @@
       <div class="foot-col">
         <h5>Connect</h5>
         <p>Dhaka, Bangladesh</p>
+        <a href="mailto:missbangladeshus@gmail.com">✉ missbangladeshus@gmail.com</a>
         <a class="fb-btn" href="https://www.facebook.com/profile.php?id=61591291470270" target="_blank" rel="noopener">📘 Follow on Facebook</a>
       </div>
     </div>
@@ -833,46 +834,40 @@
     </div>
     <div class="pay-note">
       <span class="fee">৳ 3,000 BDT</span>
-      <small>Course Fee · Payment via bKash Send Money (Personal):<br><b>+880 1937 460626</b><br>Upload your payment screenshot below.</small>
+      <small>Course Fee · Payment via bKash Send Money (Personal):<br><b>+880 1937 460626</b><br>After registering, send your payment screenshot to our WhatsApp.</small>
     </div>
-    <form id="modalForm">
-      <!-- Web3Forms: apnar access key ekhane bosan (web3forms.com theke free niye) -->
-      <input type="hidden" name="access_key" value="77dbbbce-d36e-4522-8c51-90f246971088" />
-      <input type="hidden" name="subject" value="New Masterclass Registration — Tifa Academy" />
-      <input type="hidden" name="from_name" value="Tifa Academy Website" />
-      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
-      <div class="field"><label for="mEmail">Email <i>*</i></label><input type="email" name="Email" id="mEmail" placeholder="you@example.com" required /></div>
-      <div class="field"><label for="mName">Full Name <i>*</i></label><input type="text" name="Full Name" id="mName" placeholder="Your full name" required /></div>
-      <div class="field"><label for="mAge">Age <i>*</i></label><input type="number" name="Age" id="mAge" placeholder="Your age" min="1" required /></div>
-      <div class="field"><label for="mCity">City <i>*</i></label><input type="text" name="City" id="mCity" placeholder="Your city" required /></div>
+    <!-- Custom-designed UI; submits directly to the Google Form backend (entry.* IDs) -->
+    <form id="modalForm" action="https://docs.google.com/forms/d/e/1FAIpQLSeO_EU73717Q2nvqsbCfMm_LcmBgx7QlJB54k1dqrAs8dTLbg/formResponse" method="POST" target="hidden_gform_iframe">
+      <div class="field"><label for="mWhats">WhatsApp Number <i>*</i></label><input type="tel" name="entry.942900877" id="mWhats" placeholder="+880 1XXXXXXXXX" required /></div>
+      <div class="field"><label for="mName">Full Name <i>*</i></label><input type="text" name="entry.2003169180" id="mName" placeholder="Your full name" required /></div>
+      <div class="field"><label for="mAge">Age <i>*</i></label><input type="number" name="entry.459029805" id="mAge" placeholder="Your age" min="1" required /></div>
+      <div class="field"><label for="mCity">City <i>*</i></label><input type="text" name="entry.991046155" id="mCity" placeholder="Your city" required /></div>
       <div class="field">
         <label>Rate your experience level in pageantry <i>*</i></label>
         <div class="scale">
           <span class="scale-end">Beginner</span>
-          <label class="scale-opt"><input type="radio" name="Experience Level" value="1" required /><i>1</i></label>
-          <label class="scale-opt"><input type="radio" name="Experience Level" value="2" /><i>2</i></label>
-          <label class="scale-opt"><input type="radio" name="Experience Level" value="3" /><i>3</i></label>
-          <label class="scale-opt"><input type="radio" name="Experience Level" value="4" /><i>4</i></label>
-          <label class="scale-opt"><input type="radio" name="Experience Level" value="5" /><i>5</i></label>
+          <label class="scale-opt"><input type="radio" name="entry.299749220" value="1" required /><i>1</i></label>
+          <label class="scale-opt"><input type="radio" name="entry.299749220" value="2" /><i>2</i></label>
+          <label class="scale-opt"><input type="radio" name="entry.299749220" value="3" /><i>3</i></label>
+          <label class="scale-opt"><input type="radio" name="entry.299749220" value="4" /><i>4</i></label>
+          <label class="scale-opt"><input type="radio" name="entry.299749220" value="5" /><i>5</i></label>
           <span class="scale-end">Expert</span>
         </div>
       </div>
       <div class="field">
         <label>Have you ever competed in a pageant?</label>
         <div class="radio-row">
-          <label class="radio-opt"><input type="radio" name="Competed Before" value="Yes" /><span>Yes</span></label>
-          <label class="radio-opt"><input type="radio" name="Competed Before" value="No" /><span>No</span></label>
+          <label class="radio-opt"><input type="radio" name="entry.1792269125" value="Yes" /><span>Yes</span></label>
+          <label class="radio-opt"><input type="radio" name="entry.1792269125" value="No" /><span>No</span></label>
         </div>
       </div>
-      <div class="field"><label for="mWhy">Why would you like to join Tifa Training Academy?</label><textarea name="Why Join" id="mWhy" placeholder="Tell us a little about yourself..."></textarea></div>
-      <div class="field"><label for="mGoals">What are your future goals in pageantry, modeling or public speaking?</label><textarea name="Future Goals" id="mGoals" placeholder="Your goals..."></textarea></div>
-      <div class="field">
-        <label>Upload payment confirmation screenshot</label>
-        <label class="file-drop"><input type="file" name="Payment Screenshot" id="mFile" accept="image/*" /><span id="fileName">📎 Add file (max 10 MB)</span></label>
-      </div>
+      <div class="field"><label for="mWhy">Why would you like to join Tifa Training Academy?</label><textarea name="entry.835749661" id="mWhy" placeholder="Tell us a little about yourself..."></textarea></div>
+      <div class="field"><label for="mGoals">What are your future goals in pageantry, modeling or public speaking?</label><textarea name="entry.347905876" id="mGoals" placeholder="Your goals..."></textarea></div>
       <button type="submit" class="btn btn-gold">Submit Registration 👑</button>
       <div class="form-msg" id="modalMsg">✦ Thank you! We'll contact you shortly with the class schedule.</div>
     </form>
+    <!-- Hidden target so Google's response never navigates the page -->
+    <iframe name="hidden_gform_iframe" style="display:none" title="hidden"></iframe>
   </div>
 </div>
 
@@ -1034,46 +1029,24 @@
 
   // ---- Register Modal ----
   const modal=document.getElementById('regModal');
-  const openModal=()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('mName').focus(),300);};
+  const openModal=()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('mWhats').focus(),300);};
   const closeModal=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';};
   document.querySelectorAll('[data-modal]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();closeMenu();openModal();}));
   modal.querySelector('.backdrop').addEventListener('click',closeModal);
   modal.querySelector('.mclose').addEventListener('click',closeModal);
 
-  // ---- Modal form: file name + submit ----
-  const mFile=document.getElementById('mFile'),fileName=document.getElementById('fileName');
-  mFile.addEventListener('change',()=>{fileName.textContent=mFile.files.length?('📎 '+mFile.files[0].name):'📎 Add file (max 10 MB)';});
-  document.getElementById('modalForm').addEventListener('submit',async e=>{
-    e.preventDefault();
-    const form=e.target, btn=form.querySelector('button[type=submit]'), msg=document.getElementById('modalMsg');
-    const original=btn.textContent; btn.disabled=true; btn.textContent='Sending…';
-    try{
-      const res=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)});
-      const data=await res.json();
-      if(data.success){
-        // Registrant ke shundor confirmation email (best-effort — fail korleo flow bhangbe na)
-        if(emailjsReady){
-          const f=form;
-          emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-            to_email:   f.elements['Email'].value,
-            to_name:    f.elements['Full Name'].value,
-            reg_age:    f.elements['Age'].value,
-            reg_city:   f.elements['City'].value,
-            reg_experience: (f.elements['Experience Level'].value||'—'),
-            reg_competed:   (f.elements['Competed Before'].value||'—'),
-          }).catch(err=>console.warn('Confirmation email failed:',err));
-        }
-        msg.textContent='✦ Thank you! A confirmation email is on its way. We\'ll contact you shortly with the class schedule.';
-        msg.style.color=''; msg.classList.add('show');
-        form.reset(); fileName.textContent='📎 Add file (max 10 MB)';
-      }else{
-        msg.textContent='⚠ Something went wrong. Please try again or contact us on bKash.';
-        msg.style.color='#ff9b9b'; msg.classList.add('show');
-      }
-    }catch(err){
-      msg.textContent='⚠ Network error. Please check your connection and try again.';
-      msg.style.color='#ff9b9b'; msg.classList.add('show');
-    }finally{ btn.disabled=false; btn.textContent=original; }
+  // ---- Modal form: submits to Google Form backend via hidden iframe (no CORS issue) ----
+  const modalForm=document.getElementById('modalForm');
+  modalForm.addEventListener('submit',()=>{
+    // Native form validation has already passed; the POST fires to the hidden iframe.
+    const btn=modalForm.querySelector('button[type=submit]'), msg=document.getElementById('modalMsg');
+    btn.disabled=true; btn.textContent='Sending…';
+    setTimeout(()=>{
+      msg.textContent='✦ Thank you! Please send your bKash payment screenshot to our WhatsApp. We\'ll contact you shortly with the class schedule.';
+      msg.style.color=''; msg.classList.add('show');
+      modalForm.reset();
+      btn.disabled=false; btn.textContent='Submit Registration 👑';
+    },1200);
   });
 
   // ---- Year + loader ----
