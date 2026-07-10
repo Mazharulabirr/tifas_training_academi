@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Queen Development Program — Tifa's Training Academy</title>
 <meta name="description" content="An 8-Week Pageant & Personality Development online course by Tifa's Training Academy, Dhaka. Transform. Empower. Inspire." />
+<meta name="theme-color" content="#160c0e" />
+<!-- Favicon: gold crown, matches the brand -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23160c0e'/%3E%3Cpath%20d='M10%2046%20L14%2022%20L24%2034%20L32%2016%20L40%2034%20L50%2022%20L54%2046%20Z'%20fill='%23d4af37'/%3E%3Crect%20x='12'%20y='49'%20width='40'%20height='6'%20rx='2'%20fill='%23d4af37'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -427,6 +430,9 @@
   .fb-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--gold-3);padding:11px 20px;border-radius:40px;color:var(--gold-1);margin-top:6px;transition:.3s}
   .fb-btn:hover{background:var(--gold);color:var(--black)}
   .copyright{text-align:center;padding-top:26px;border-top:1px solid rgba(212,175,55,.12);font-size:13px;color:rgba(247,240,225,.45)}
+  .dev-credit{text-align:center;margin-top:10px;font-size:12px;letter-spacing:.4px;color:rgba(247,240,225,.4)}
+  .dev-credit a{color:var(--gold);text-decoration:none;font-weight:500;transition:color .25s,text-shadow .25s}
+  .dev-credit a:hover{color:var(--gold-1);text-shadow:0 0 12px rgba(212,175,55,.5)}
 
   /* ===== REVEAL ===== */
   .reveal{opacity:0;transform:translateY(36px);transition:.8s cubic-bezier(.2,.7,.2,1)}
@@ -817,6 +823,7 @@
       </div>
     </div>
     <div class="copyright">© <span id="year"></span> Tifa's Training Academy. All rights reserved. · It's your time to be the next Queen.</div>
+    <div class="dev-credit">Developed by <a href="https://www.abirdev.me" target="_blank" rel="noopener">Mazharul Abir</a></div>
   </div>
 </footer>
 
