@@ -270,6 +270,27 @@
   .stat b{font-family:'Playfair Display',serif;font-size:46px;color:var(--gold-3);display:block;line-height:1}
   .stat span{font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 
+  /* ===== TEACHERS ===== */
+  .teachers{background:radial-gradient(100% 100% at 50% 0%,rgba(90,22,58,.4),transparent 70%),linear-gradient(135deg,#0b0607,#1e0a17 50%,#0b0607);position:relative}
+  .teachers-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:30px;margin-top:40px}
+  .teachers-grid .teacher-card:nth-child(1),
+  .teachers-grid .teacher-card:nth-child(2),
+  .teachers-grid .teacher-card:nth-child(3){grid-column:span 2}
+  .teachers-grid .teacher-card:nth-child(4){grid-column:2/span 2}
+  .teachers-grid .teacher-card:nth-child(5){grid-column:4/span 2}
+  .teacher-card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s;position:relative;backdrop-filter:blur(4px)}
+  .teacher-card:hover{transform:translateY(-10px);border-color:var(--gold);box-shadow:0 20px 40px rgba(0,0,0,.5),0 0 30px rgba(212,175,55,.15)}
+  .teacher-img-wrap{position:relative;aspect-ratio:1/1.2;overflow:hidden;border-bottom:1px solid var(--line)}
+  .teacher-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .teacher-card:hover .teacher-img-wrap img{transform:scale(1.05)}
+  .teacher-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,6,7,.9) 0%,transparent 60%);display:flex;align-items:flex-end;padding:20px;opacity:0;transition:opacity .4s}
+  .teacher-card:hover .teacher-overlay{opacity:1}
+  .teacher-role{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-1);background:rgba(90, 22, 58, 0.85);padding:6px 14px;border-radius:30px;border:1px solid var(--line)}
+  .teacher-info{padding:24px;text-align:center}
+  .teacher-info h3{font-size:20px;color:var(--gold-1);margin-bottom:6px;letter-spacing:.5px}
+  .teacher-info p{color:var(--muted);font-size:12.5px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+  .teacher-achievement{display:block;font-size:12px;color:var(--gold-2);letter-spacing:.2px;font-style:italic}
+
   /* ===== CURRICULUM ===== */
   .curriculum{background:linear-gradient(180deg,var(--cream),#f1e8d6)}
   .weeks{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
@@ -462,6 +483,13 @@
     .feat-grid{grid-template-columns:repeat(3,1fr)}
     .testi-grid{grid-template-columns:repeat(2,1fr);gap:20px}
     .gal-grid{grid-template-columns:repeat(3,1fr);gap:16px}
+    .teachers-grid{grid-template-columns:repeat(2,1fr);gap:24px}
+    .teachers-grid .teacher-card:nth-child(1),
+    .teachers-grid .teacher-card:nth-child(2),
+    .teachers-grid .teacher-card:nth-child(3),
+    .teachers-grid .teacher-card:nth-child(4),
+    .teachers-grid .teacher-card:nth-child(5){grid-column:span 1!important;max-width:100%!important;margin:0!important}
+    .teachers-grid .teacher-card:nth-child(5){grid-column:1/span 2!important;max-width:50%!important;margin:0 auto!important}
   }
 
   /* Mobile Drawer Menu Activation & Portrait Tablets (max-width: 980px) */
@@ -512,6 +540,7 @@
     .nav-links.open>*:nth-child(6){transition-delay:.36s}
     .nav-links.open>*:nth-child(7){transition-delay:.42s}
     .nav-links.open>*:nth-child(8){transition-delay:.48s}
+    .nav-links.open>*:nth-child(9){transition-delay:.54s}
     .nav-backdrop{position:fixed;inset:0;background:rgba(6,3,4,.66);opacity:0;visibility:hidden;transition:.42s;z-index:80}
     .nav-backdrop.show{opacity:1;visibility:visible}
     .burger{display:flex;z-index:95}
@@ -526,6 +555,12 @@
     .weeks{grid-template-columns:1fr}
     .feat-grid{grid-template-columns:repeat(2,1fr)}
     .testi-grid{grid-template-columns:1fr}
+    .teachers-grid{grid-template-columns:1fr;gap:20px}
+    .teachers-grid .teacher-card:nth-child(1),
+    .teachers-grid .teacher-card:nth-child(2),
+    .teachers-grid .teacher-card:nth-child(3),
+    .teachers-grid .teacher-card:nth-child(4),
+    .teachers-grid .teacher-card:nth-child(5){grid-column:span 1!important;max-width:100%!important;margin:0!important}
     .gal-item{width:236px}
     .gal-nav{width:46px;height:46px;font-size:22px}
   }
@@ -608,6 +643,7 @@
     </div>
     <a href="#program">Program</a>
     <a href="#mentor">Mentor</a>
+    <a href="#teachers">Teacher's</a>
     <a href="#curriculum">Curriculum</a>
     <a href="#gallery">Gallery</a>
     <a href="#testi">Voices</a>
@@ -713,6 +749,96 @@
   </div>
 </section>
 
+<!-- TEACHERS -->
+<section class="teachers dark" id="teachers">
+  <span class="grain"></span>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Expert Panel</span>
+      <h2 class="serif">Teacher's</h2>
+      <div class="divider"></div>
+      <p>Our dedicated team of professionals who will guide you every step of the way.</p>
+    </div>
+    
+    <div class="teachers-grid">
+      <!-- Teacher 1 -->
+      <div class="teacher-card reveal">
+        <div class="teacher-img-wrap">
+          <img src="image/215d5e8e-f413-483d-8cbc-336f5e18553a.jpg" alt="Fahmida Sultana Dima" loading="lazy" />
+          <div class="teacher-overlay">
+            <span class="teacher-role">Grooming &amp; Etiquette</span>
+          </div>
+        </div>
+        <div class="teacher-info">
+          <h3 class="serif">Fahmida Sultana Dima</h3>
+          <p>Guest Teacher</p>
+          <span class="teacher-achievement">Scientist · Miss Globe BD '24</span>
+        </div>
+      </div>
+      
+      <!-- Teacher 2 -->
+      <div class="teacher-card reveal">
+        <div class="teacher-img-wrap">
+          <img src="image/245fee9d-2309-4a60-abcf-c6c793ad15ee.jpg" alt="Farzana Yeasmin Ananna" loading="lazy" />
+          <div class="teacher-overlay">
+            <span class="teacher-role">Interview Preparation</span>
+          </div>
+        </div>
+        <div class="teacher-info">
+          <h3 class="serif">Farzana Yeasmin Ananna</h3>
+          <p>Guest Teacher</p>
+          <span class="teacher-achievement">Miss Cosmo Bangladesh '24</span>
+        </div>
+      </div>
+      
+      <!-- Teacher 3 -->
+      <div class="teacher-card reveal">
+        <div class="teacher-img-wrap">
+          <img src="image/27edf088-9b6c-44ea-b766-e2508ca2a6ce.jpg" alt="Masuda Khan" loading="lazy" />
+          <div class="teacher-overlay">
+            <span class="teacher-role">Personal Branding &amp; Social Impact</span>
+          </div>
+        </div>
+        <div class="teacher-info">
+          <h3 class="serif">Masuda Khan</h3>
+          <p>Guest Teacher</p>
+          <span class="teacher-achievement">Top 10 Miss Universe BD</span>
+        </div>
+      </div>
+      
+      <!-- Teacher 4 -->
+      <div class="teacher-card reveal">
+        <div class="teacher-img-wrap">
+          <img src="image/ac37ec56-c260-4697-b754-0e4a153beeb5.jpg" alt="Fardin Bayezid" loading="lazy" />
+          <div class="teacher-overlay">
+            <span class="teacher-role">Stage Presence &amp; Wardrobe</span>
+          </div>
+        </div>
+        <div class="teacher-info">
+          <h3 class="serif">Fardin Bayezid</h3>
+          <p>Guest Teacher</p>
+          <span class="teacher-achievement">Fashion Designer</span>
+        </div>
+      </div>
+      
+      <!-- Teacher 5 -->
+      <div class="teacher-card reveal">
+        <div class="teacher-img-wrap">
+          <img src="image/cd8dec14-024c-4676-8085-5ae4134ae886.jpg" alt="Hiam Amani Hafizuddin" loading="lazy" />
+          <div class="teacher-overlay">
+            <span class="teacher-role">Communication &amp; Public Speaking</span>
+          </div>
+        </div>
+        <div class="teacher-info">
+          <h3 class="serif">Hiam Amani Hafizuddin</h3>
+          <p>Guest Teacher</p>
+          <span class="teacher-achievement">Founder, Miss Bangladesh US</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CURRICULUM -->
 <section class="curriculum light" id="curriculum">
   <div class="wrap">
@@ -811,6 +937,7 @@
         <h5>Explore</h5>
         <a href="#program">The Program</a>
         <a href="#mentor">Mentor</a>
+        <a href="#teachers">Teacher's</a>
         <a href="#curriculum">Curriculum</a>
         <a href="#gallery">Gallery</a>
         <a href="#register" data-modal>Register</a>
