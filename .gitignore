@@ -3,4 +3,4 @@ Thumbs.db
 .DS_Store
 
 # Raw source images (not used by the site — only gallery/ is referenced)
-Image/
+# Image/
